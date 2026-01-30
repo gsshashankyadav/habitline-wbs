@@ -21,10 +21,10 @@ export default function Hero() {
   const y = useTransform(imageScroll, [0, 1], [0, 100], { ease: easeInOut });
 
   // Left vector: pt-40 → pt-0
-  const leftPaddingTop = useTransform(scrollYProgress, [0, 1], [120, 0, 160], { ease: easeInOut });
+  const leftPaddingTop = useTransform(scrollYProgress, [0, 1], [60, 0, 160], { ease: easeInOut });
 
   // Right vector: pt-0 → pt-40
-  const rightPaddingTop = useTransform(scrollYProgress, [0, 1], [120, 160, 0], { ease: easeInOut });
+  const rightPaddingTop = useTransform(scrollYProgress, [0, 1], [100, 160, 0], { ease: easeInOut });
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -112,7 +112,7 @@ export default function Hero() {
         {/* CTA Buttons */}
         <motion.div
           variants={itemVariants}
-          className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-[50px] text-lg font-medium leading-[1.2]"
+          className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-[50px] md:mb-[80px] text-lg font-medium leading-[1.2]"
         >
           <SlideButton
             className="px-[26px] text-[16px] py-[12px] md:px-[34px] md:text-[18px] md:py-[16px] bg-white text-gray-900 rounded-full shadow-lg w-fit"

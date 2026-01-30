@@ -1,5 +1,4 @@
-import { motion, useScroll, useTransform, AnimatePresence } from "motion/react";
-import { Menu, X } from "lucide-react";
+import { motion, useScroll, useTransform, AnimatePresence,easeInOut } from "motion/react";
 import { useState } from "react";
 import SlideButton from "./SlideButton";
 
@@ -8,9 +7,9 @@ export default function Header() {
   const [open, setOpen] = useState(false);
 
   // Desktop scroll transforms
-  const logoX = useTransform(scrollY, [0, 200], [0, 170]);
-  const navX = useTransform(scrollY, [0, 200], [-20, 0]);
-  const actionsX = useTransform(scrollY, [0, 200], [0, -170]);
+  const logoX = useTransform(scrollY, [0, 200], [0, 170], { ease: easeInOut });
+  const navX = useTransform(scrollY, [0, 200], [-20, 0], { ease: easeInOut });
+  const actionsX = useTransform(scrollY, [0, 200], [0, -170], { ease: easeInOut });
 
   const navItems = [
     { label: "What's inside", href: "#whats-inside" },

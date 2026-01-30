@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, useScroll, useTransform } from 'motion/react';
+import { motion, useScroll, useTransform, easeInOut } from 'motion/react';
 import { Play } from 'lucide-react';
 import { useRef } from 'react';
 import SlideButton from './SlideButton';
@@ -18,13 +18,13 @@ export default function Hero() {
     target: imageRef,
     offset: ["start end", "end start"],
   });
-  const y = useTransform(imageScroll, [0, 1], [0, 100]);
+  const y = useTransform(imageScroll, [0, 1], [0, 100], { ease: easeInOut });
 
   // Left vector: pt-40 → pt-0
-  const leftPaddingTop = useTransform(scrollYProgress, [0, 1], [160, 0]);
+  const leftPaddingTop = useTransform(scrollYProgress, [0, 1], [120, 0, 160], { ease: easeInOut });
 
   // Right vector: pt-0 → pt-40
-  const rightPaddingTop = useTransform(scrollYProgress, [0, 1], [0, 160]);
+  const rightPaddingTop = useTransform(scrollYProgress, [0, 1], [120, 160, 0], { ease: easeInOut });
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -176,7 +176,7 @@ export default function Hero() {
           {/* Desktop Left Vector */}
           <motion.div
             style={{ paddingTop: leftPaddingTop }}
-            className="hidden md:block w-full max-w-[240px]"
+            className="hidden md:block w-full max-w-[240px] pt-20"
           >
             <img
               src="/hero-vector-left.svg"
@@ -201,7 +201,7 @@ export default function Hero() {
           {/* Desktop Right Vector */}
           <motion.div
             style={{ paddingTop: rightPaddingTop }}
-            className="hidden md:block w-full max-w-[240px]"
+            className="hidden md:block w-full max-w-[240px] pt-30"
           >
             <img
               src="/hero-vector-right.svg"

@@ -8,9 +8,9 @@ export default function Header() {
   const [open, setOpen] = useState(false);
 
   // Desktop scroll transforms
-  const logoX = useTransform(scrollY, [0, 200], [0, 195]);
-  const navScale = useTransform(scrollY, [0, 200], [1, 1.08]);
-  const actionsX = useTransform(scrollY, [0, 200], [0, -195]);
+  const logoX = useTransform(scrollY, [0, 200], [0, 170]);
+  const navX = useTransform(scrollY, [0, 200], [-20, 0]);
+  const actionsX = useTransform(scrollY, [0, 200], [0, -170]);
 
   const navItems = [
     { label: "What's inside", href: "#whats-inside" },
@@ -22,32 +22,28 @@ export default function Header() {
   return (
     <>
       {/* ================= DESKTOP HEADER ================= */}
-      <motion.header className="fixed top-0 left-0 right-0 z-50 px-6 py-6 hidden md:block">
-        <div className="max-w-7xl mx-auto">
-          <motion.nav className="flex items-center justify-between">
+      <motion.header className="fixed top-0 left-0 right-0 z-50  max-w-[1260px] py-[30px] hidden md:block mx-auto">
+        <div className="px-[30px] ">
+          <motion.nav className="flex items-center justify-between gap-[6px] h-[64px]" >
             {/* Logo */}
-            {/* <motion.div style={{ x: logoX }}>
-              <a className="bg-white px-2 py-2 rounded-3xl shadow-lg">
-                <img src="/logo.svg" width="134" height="32" alt="Logo" />
-              </a>
-            </motion.div> */}
             <motion.div
               style={{ x: logoX }}
-              className="flex gap-2 bg-white px-4 py-4 rounded-3xl shadow-lg"
+              className="flex gap-2 bg-white px-4 py-4 rounded-[20px] shadow-lg "
             >
               <img src="/logo.svg" width="134" height="32" alt="Logo" />
             </motion.div>
 
             {/* Nav */}
             <motion.div
-              style={{ scale: navScale }}
-              className="flex items-center bg-white px-2 py-2 rounded-3xl shadow-lg"
+
+              style={{x : navX,  fontFamily:`"Google Sans Flex", "Google Sans Flex Placeholder", sans-serif` }}
+              className="flex items-center bg-white p-[6px] gap-[6px] rounded-[20px] shadow-lg leading-[1] h-full"
             >
               {navItems.map((item) => (
                 <a
                   key={item.label}
                   href={item.href}
-                  className="px-7 py-3 text-sm font-medium rounded-full hover:bg-gray-100"
+                  className="px-7 py-4 text-[15px] text-[#494d4d] font-medium rounded-[16px] hover:bg-[#e8e8e8]"
                 >
                   {item.label}
                 </a>
@@ -57,7 +53,7 @@ export default function Header() {
             {/* Actions */}
             <motion.div
               style={{ x: actionsX }}
-              className="flex gap-2 bg-white px-2 py-2 rounded-3xl shadow-lg"
+              className="flex gap-2 bg-white p-[6px] rounded-[20px] shadow-lg h-full"
             >
               <ActionButton src="/icons/app-store.svg" />
               <ActionButton src="/icons/play-store.svg" />
@@ -67,70 +63,98 @@ export default function Header() {
       </motion.header>
 
       {/* ================= MOBILE HEADER ================= */}
-      <motion.header className="fixed top-0 left-0 right-0 z-50 px-4 py-4 md:hidden">
-        <div className="max-w-[95%] mx-auto">
+      <motion.header className="fixed top-0 left-0 right-0 z-50 px-5 py-5 md:hidden">
+        <div className="mx-auto">
           {/* Single Island */}
-          <div className="flex items-center justify-between bg-white px-3 py-3 rounded-3xl shadow-xl">
+          <div className="flex items-center justify-between bg-white p-[10px] rounded-2xl shadow-xl">
             {/* Logo */}
-            <img src="/logo.svg" width="110" height="26" alt="Logo" />
+            <img src="/logo.svg" width="134" height="32" alt="Logo" />
 
             {/* Actions */}
             <div className="flex items-center gap-2">
-              <ActionButton src="/icons/app-store.svg" />
+              <ActionButton src="/icons/app-store.svg"/>
               <ActionButton src="/icons/play-store.svg" />
 
               {/* Hamburger */}
-              <motion.button
-                onClick={() => setOpen(!open)}
-                className="w-10 h-10 bg-gray-200 rounded-lg flex items-center justify-center"
-                whileTap={{ scale: 0.9 }}
-              >
-                <AnimatePresence mode="wait">
-                  {open ? (
-                    <motion.div
-                      key="close"
-                      initial={{ rotate: -90, opacity: 0 }}
-                      animate={{ rotate: 0, opacity: 1 }}
-                      exit={{ rotate: 90, opacity: 0 }}
-                    >
-                      <X size={20} />
-                    </motion.div>
-                  ) : (
-                    <motion.div
-                      key="menu"
-                      initial={{ rotate: 90, opacity: 0 }}
-                      animate={{ rotate: 0, opacity: 1 }}
-                      exit={{ rotate: -90, opacity: 0 }}
-                    >
-                      <Menu size={20} />
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </motion.button>
+                <motion.button
+                  onClick={() => setOpen(!open)}
+                  whileTap={{ scale: 0.9 }}
+                  className="relative w-8 h-8 rounded-lg bg-gray-200 flex items-center justify-center"
+                >
+                  {/* Top line */}
+                  <motion.span
+                    className="absolute w-5 h-[2px] bg-gray-700 rounded-full"
+                    animate={
+                      open
+                        ? { rotate: 45, y: 0 }
+                        : { rotate: 0, y: -3 }
+                    }
+                    transition={{ duration: 0.25, ease: "easeInOut" }}
+                  />
+
+                  {/* Bottom line */}
+                  <motion.span
+                    className="absolute w-5 h-[2px] bg-gray-700 rounded-full"
+                    animate={
+                      open
+                        ? { rotate: -45, y: 0 }
+                        : { rotate: 0, y: 3 }
+                    }
+                    transition={{ duration: 0.25, ease: "easeInOut" }}
+                  />
+                </motion.button>
+
             </div>
           </div>
 
-          {/* Mobile Menu */}
+          {/* Backdrop Overlay */}
           <AnimatePresence>
             {open && (
               <motion.div
-                initial={{ height: 0, opacity: 0 }}
-                animate={{ height: "auto", opacity: 1 }}
-                exit={{ height: 0, opacity: 0 }}
-                className="mt-3 bg-white rounded-3xl shadow-xl overflow-hidden"
-              >
-                {navItems.map((item) => (
-                  <a
-                    key={item.label}
-                    href={item.href}
-                    className="block px-7 py-3 text-sm font-medium rounded-full hover:bg-gray-100"
-                  >
-                    {item.label}
-                  </a>
-                ))}
-              </motion.div>
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
+                className="fixed inset-0 -z-10"
+                style={{
+                  backdropFilter: "blur(10px)",
+                  backgroundColor: "rgba(19, 21, 21, 0.1)",
+                  willChange: "transform",
+                }}
+                onClick={() => setOpen(false)}
+              />
             )}
           </AnimatePresence>
+
+          {/* Mobile Menu */}
+          <AnimatePresence>
+  {open && (
+    <motion.div
+      initial={{ y: 0, opacity: 0 }}
+      animate={{
+        y: 10,
+        height: "auto",
+        opacity: 1,
+        transition: { duration: 0.3, ease: "easeOut" },
+      }}
+      exit={{ y: 0, opacity: 0, transition: { duration: 0.2 } }}
+      className="bg-white rounded-2xl shadow-xl overflow-hidden p-3 flex flex-col gap-[6px]"
+    >
+      {navItems.map((item) => (
+        <a
+          key={item.label}
+          href={item.href}
+          className="block p-[6px] text-[#494d4d] text-[15px] font-medium rounded-full hover:bg-gray-100 h-[31.5px] flex items-center"
+          style={{
+            fontFamily: `"Google Sans Flex", "Google Sans Flex Placeholder", sans-serif`,
+          }}
+        >
+          {item.label}
+        </a>
+      ))}
+    </motion.div>
+  )}
+</AnimatePresence>
         </div>
       </motion.header>
     </>
@@ -143,9 +167,9 @@ function ActionButton({ src }) {
     <SlideButton
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.95 }}
-      className="w-10 h-10 bg-gray-200 rounded-xl shadow flex items-center justify-center"
+      className="w-[32px] h-[32px] md:w-[50px] md:h-[50px] bg-gray-200 rounded-lg  shadow flex items-center justify-center"
     >
-      <img src={src} width="20" height="20" alt="" />
+      <img src={src} className="w-[16px] h-[16px] md:w-[22px] md:h-[22px]" alt=""/>
     </SlideButton>
   );
 }

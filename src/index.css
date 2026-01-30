@@ -1,6 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&family=Stack+Sans+Headline:wght@200..700&display=swap');
 @import "tailwindcss";
+
 
 body {
   background-color: #F7F7F7;
-  font-family: 'Stack Sans', sans-serif;
+  
+}
+
+p, button{
+  
+   font-family: 'Google Sans Flex', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+ font-family: "Stack Sans Headline","Stack Sans Headline Placeholder",sans-serif;
 }

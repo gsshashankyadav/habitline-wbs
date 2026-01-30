@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fontsource/stack-sans-headline": "^5.2.1",
     "@tailwindcss/vite": "^4.1.18",
     "lucide-react": "^0.563.0",
     "motion": "^12.29.0",

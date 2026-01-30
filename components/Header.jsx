@@ -22,7 +22,7 @@ export default function Header() {
   return (
     <>
       {/* ================= DESKTOP HEADER ================= */}
-      <motion.header className="fixed top-0 left-0 right-0 z-50  max-w-[1260px] py-[30px] hidden md:block mx-auto">
+      <motion.header className="fixed top-0 left-0 right-0 z-50  max-w-[1260px] py-[30px] hidden lg:block mx-auto">
         <div className="px-[30px] ">
           <motion.nav className="flex items-center justify-between gap-[6px] h-[64px]" >
             {/* Logo */}
@@ -63,7 +63,7 @@ export default function Header() {
       </motion.header>
 
       {/* ================= MOBILE HEADER ================= */}
-      <motion.header className="fixed top-0 left-0 right-0 z-50 px-5 py-5 md:hidden">
+      <motion.header className="fixed top-0 left-0 right-0 z-50 px-5 py-5 lg:hidden">
         <div className="mx-auto">
           {/* Single Island */}
           <div className="flex items-center justify-between bg-white p-[10px] rounded-2xl shadow-xl">
@@ -167,9 +167,9 @@ function ActionButton({ src }) {
     <SlideButton
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.95 }}
-      className="w-[32px] h-[32px] md:w-[50px] md:h-[50px] bg-gray-200 rounded-lg  shadow flex items-center justify-center"
+      className="w-[32px] h-[32px] lg:w-[50px] lg:h-[50px] bg-gray-200 rounded-lg  shadow flex items-center justify-center"
     >
-      <img src={src} className="w-[16px] h-[16px] md:w-[22px] md:h-[22px]" alt=""/>
+      <img src={src} className="w-[16px] h-[16px] lg:w-[22px] lg:h-[22px]" alt=""/>
     </SlideButton>
   );
 }
